@@ -1,0 +1,113 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sprites/9patch.png" type="Texture" id=1]
+[ext_resource path="res://scripts/plot_details.gd" type="Script" id=2]
+[ext_resource path="res://sprites/enemies/blank_icon.png" type="Texture" id=3]
+[ext_resource path="res://futilepro_font.tres" type="DynamicFont" id=4]
+
+[node name="plot_details" type="NinePatchRect"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -148.0
+margin_top = -172.0
+margin_right = -16.0
+margin_bottom = -16.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 132, 156 )
+texture = ExtResource( 1 )
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vbox" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+margin_top = 8.0
+margin_right = -16.0
+margin_bottom = -8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="curr_monsters" type="GridContainer" parent="vbox"]
+margin_right = 104.0
+margin_bottom = 68.0
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="texture_rect" type="TextureRect" parent="vbox/curr_monsters"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 3 )
+
+[node name="texture_rect2" type="TextureRect" parent="vbox/curr_monsters"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+texture = ExtResource( 3 )
+
+[node name="texture_rect3" type="TextureRect" parent="vbox/curr_monsters"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+texture = ExtResource( 3 )
+
+[node name="texture_rect4" type="TextureRect" parent="vbox/curr_monsters"]
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+texture = ExtResource( 3 )
+
+[node name="texture_rect5" type="TextureRect" parent="vbox/curr_monsters"]
+margin_left = 36.0
+margin_top = 36.0
+margin_right = 68.0
+margin_bottom = 68.0
+texture = ExtResource( 3 )
+
+[node name="texture_rect6" type="TextureRect" parent="vbox/curr_monsters"]
+margin_left = 72.0
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 68.0
+texture = ExtResource( 3 )
+
+[node name="added_lbl" type="Label" parent="vbox"]
+margin_top = 72.0
+margin_right = 104.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 4 )
+text = "+"
+align = 1
+valign = 1
+
+[node name="hbox" type="HBoxContainer" parent="vbox"]
+margin_top = 90.0
+margin_right = 104.0
+margin_bottom = 122.0
+
+[node name="monster_icon" type="TextureRect" parent="vbox/hbox"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 16, 16 )
+texture = ExtResource( 3 )
+
+[node name="name" type="Label" parent="vbox/hbox"]
+margin_left = 36.0
+margin_top = 9.0
+margin_right = 36.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.780392, 0.0745098, 0.0745098, 1 )
+align = 1
+valign = 1

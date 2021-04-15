@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://sprites/9patch.png" type="Texture" id=1]
+[ext_resource path="res://sprites/button2.png" type="Texture" id=2]
+[ext_resource path="res://sprites/button3.png" type="Texture" id=3]
+[ext_resource path="res://sprites/button1.png" type="Texture" id=4]
+[ext_resource path="res://scripts/confirm_move.gd" type="Script" id=5]
+[ext_resource path="res://futilepro_font.tres" type="DynamicFont" id=6]
+
+[node name="confirm_move" type="NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -352.0
+margin_top = -208.0
+margin_bottom = -116.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_bottom = 7.0
+custom_fonts/font = ExtResource( 6 )
+text = "Move to this space?"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="yes_btn" type="TextureButton" parent="."]
+margin_left = 272.0
+margin_top = 12.0
+margin_right = 336.0
+margin_bottom = 44.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 2 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="yes_btn"]
+anchor_left = 0.5
+anchor_top = 0.4
+anchor_right = 0.5
+anchor_bottom = 0.4
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+custom_fonts/font = ExtResource( 6 )
+text = "Yes"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="no_btn" type="TextureButton" parent="."]
+margin_left = 272.0
+margin_top = 48.0
+margin_right = 336.0
+margin_bottom = 80.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 2 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="no_btn"]
+anchor_left = 0.5
+anchor_top = 0.4
+anchor_right = 0.5
+anchor_bottom = 0.4
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+custom_fonts/font = ExtResource( 6 )
+text = "No"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_down" from="yes_btn" to="." method="_on_yes_btn_button_down"]
+[connection signal="button_up" from="yes_btn" to="." method="_on_yes_btn_button_up"]
+[connection signal="pressed" from="yes_btn" to="." method="_on_yes_btn_pressed"]
+[connection signal="button_down" from="no_btn" to="." method="_on_no_btn_button_down"]
+[connection signal="button_up" from="no_btn" to="." method="_on_no_btn_button_up"]
+[connection signal="pressed" from="no_btn" to="." method="_on_no_btn_pressed"]

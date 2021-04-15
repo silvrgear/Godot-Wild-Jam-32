@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
+[ext_resource path="res://sprites/enemies/gobkin.png" type="Texture" id=2]
+[ext_resource path="res://futilepro_font.tres" type="DynamicFont" id=3]
+
+[node name="enemy1" type="TextureRect"]
+margin_right = 64.0
+margin_bottom = 64.0
+mouse_default_cursor_shape = 2
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="health" type="Label" parent="."]
+margin_right = 64.0
+margin_bottom = 14.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 3 )
+text = "99"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="attack" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -32.0
+margin_right = 32.0
+margin_bottom = 14.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 3 )
+text = "99"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="defense" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -7.0
+margin_right = 64.0
+margin_bottom = 7.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 3 )
+text = "99"
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="speed" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -32.0
+margin_top = -7.0
+margin_right = 32.0
+margin_bottom = 7.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 3 )
+text = "99"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="gui_input" from="." to="." method="_on_enemy1_gui_input"]
