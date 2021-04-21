@@ -2,7 +2,7 @@ extends Area2D
 
 onready var confirm_move_pop = preload("res://entities/confirm_move.tscn")
 onready var plot_details = preload("res://entities/plot_details.tscn")
-onready var canvas = get_node("/root").get_child(0).get_node("canvas")
+onready var canvas = get_node("/root").get_child(1).get_node("canvas")
 
 var n_move = 0
 var e_move = 0
@@ -15,6 +15,8 @@ var outcome
 var move_history = [] #n, e, w, s
 var pos_history = []
 var avail_moves = 0
+
+var on_boss = false
 
 func _ready():
 	pass
@@ -93,6 +95,7 @@ func get_move_pos():
 	pass
 
 func move(last_dir, pos):
+	$walk.play()
 	avail_moves -= 1
 	move_history.append(last_dir)
 	pos_history.append(pos)
@@ -116,6 +119,7 @@ func move(last_dir, pos):
 	lines.add_point(global_position)
 
 func back_move():
+	$walk.play()
 	avail_moves += 1
 	move_history.pop_back()
 	pos_history.pop_back()
@@ -131,6 +135,7 @@ func back_move():
 	pass
 
 func return_to_orig_position():
+	$walk.play()
 	avail_moves += 1
 	match move_history.back():
 		"n": position.y -= pos_history.back()

@@ -1,30 +1,87 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
-[ext_resource path="res://sprites/enemies/gobkin.png" type="Texture" id=2]
+[ext_resource path="res://sprites/enemies/boss.png" type="Texture" id=2]
 [ext_resource path="res://futilepro_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://soundtrack/sfx/sword-1a.wav" type="AudioStream" id=4]
 
-[node name="enemy1" type="TextureRect"]
+[sub_resource type="Animation" id=1]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("tex:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 8, -8 ), Vector2( -2, 2 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "dissolve"
+
+[sub_resource type="Animation" id=3]
+resource_name = "hurt"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("tex:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 4, 0 ), Vector2( -4, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("tex:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="enemy1" type="Control"]
 margin_right = 64.0
 margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
 mouse_default_cursor_shape = 2
-texture = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="health" type="Label" parent="."]
+[node name="tex" type="TextureRect" parent="."]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="health" type="Label" parent="tex"]
 margin_right = 64.0
 margin_bottom = 14.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.780392, 0.0745098, 0.0745098, 1 )
 text = "99"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="attack" type="Label" parent="."]
+[node name="attack" type="Label" parent="tex"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -32.0
@@ -32,13 +89,14 @@ margin_right = 32.0
 margin_bottom = 14.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.780392, 0.0745098, 0.0745098, 1 )
 text = "99"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="defense" type="Label" parent="."]
+[node name="defense" type="Label" parent="tex"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -7.0
@@ -46,13 +104,14 @@ margin_right = 64.0
 margin_bottom = 7.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.780392, 0.0745098, 0.0745098, 1 )
 text = "99"
 valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="speed" type="Label" parent="."]
+[node name="speed" type="Label" parent="tex"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -63,10 +122,22 @@ margin_right = 32.0
 margin_bottom = 7.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.780392, 0.0745098, 0.0745098, 1 )
 text = "99"
 align = 2
 valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/attack = SubResource( 1 )
+anims/dissolve = SubResource( 2 )
+anims/hurt = SubResource( 3 )
+
+[node name="hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -8.0
+pitch_scale = 1.2
 [connection signal="gui_input" from="." to="." method="_on_enemy1_gui_input"]
+[connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]

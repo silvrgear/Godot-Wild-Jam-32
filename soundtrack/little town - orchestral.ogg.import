@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/little town - orchestral.ogg-a49f5f366912128d57176cdcc759ed9f.oggstr"
+
+[deps]
+
+source_file="res://soundtrack/little town - orchestral.ogg"
+dest_files=[ "res://.import/little town - orchestral.ogg-a49f5f366912128d57176cdcc759ed9f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

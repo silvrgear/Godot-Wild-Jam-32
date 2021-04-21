@@ -37,8 +37,8 @@ func last_roll():
 	player.move_history.clear()
 	randomize()
 	
-#	var roll = randi() % 7 + 1
-	var roll = 6 #for testing
+	var roll = randi() % 7 + 1
+#	var roll = 1 #for testing
 	$roller/label.text = str(roll)
 	outcome_effect(roll)
 	
@@ -50,16 +50,24 @@ func last_roll():
 func outcome_effect(roll):
 	match roll:
 		1: outcome = "worm"
-		2: outcome = "none"
+		2: outcome = "none" #nothing happens
 		3: outcome = "mole"
-		4: outcome = "lvlu"
+		4: 
+			outcome = "exp"
+			player.get_node("stats").exp_roll()
 		5: outcome = "wulf"
 		6: outcome = "gobk"
-		7: outcome = "artf"
+		7: 
+			outcome = "artf"
+			Items.spawn_random_item()
 	
 	player.outcome = outcome
 
 func enable_rolling():
+	get_parent().get_parent().get_node("overworld").play()
+	player.get_node("canvas/stats").visible = true
+	get_parent().get_node("avail_moves").visible = true
+	
 	$roller.modulate = Color("#ffffff")
 	$roller.visible = true
 	$roll_btn.visible = true
@@ -81,6 +89,7 @@ func _on_roll_btn_pressed():
 	
 	player.get_move_pos()
 	
+	$click.play()
 	$roll_btn.disabled = true
 	$roll_btn.visible = false
 	$roller.visible = true

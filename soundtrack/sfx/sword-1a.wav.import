@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sword-1a.wav-6d6b6161421e1223d12f260cec1fbc03.sample"
+
+[deps]
+
+source_file="res://soundtrack/sfx/sword-1a.wav"
+dest_files=[ "res://.import/sword-1a.wav-6d6b6161421e1223d12f260cec1fbc03.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

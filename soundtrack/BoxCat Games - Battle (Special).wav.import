@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/BoxCat Games - Battle (Special).wav-28bb4e1f2d9c881777cb9ff6ccd355b6.sample"
+
+[deps]
+
+source_file="res://soundtrack/BoxCat Games - Battle (Special).wav"
+dest_files=[ "res://.import/BoxCat Games - Battle (Special).wav-28bb4e1f2d9c881777cb9ff6ccd355b6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

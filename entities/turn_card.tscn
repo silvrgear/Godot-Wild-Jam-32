@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sprites/enemies/blank_icon.png" type="Texture" id=1]
+[ext_resource path="res://scripts/turn_card.gd" type="Script" id=2]
+
+[node name="turn_card" type="TextureRect"]
+margin_right = 40.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 40, 32 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

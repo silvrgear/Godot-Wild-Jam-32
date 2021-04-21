@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://sprites/player.png" type="Texture" id=1]
 [ext_resource path="res://scripts/player.gd" type="Script" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://futilepro_font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scripts/stats.gd" type="Script" id=5]
 [ext_resource path="res://sprites/player_icon.png" type="Texture" id=6]
+[ext_resource path="res://scripts/level_up.gd" type="Script" id=7]
+[ext_resource path="res://sprites/level_up.png" type="Texture" id=8]
+[ext_resource path="res://soundtrack/sfx/footstep_jack_01.wav" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 20 )
@@ -38,6 +41,47 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 3 ), Vector2( 0, 0 ) ]
 }
 
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0.584314, 0.913725, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.356863, 0.356863, 0.356863, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="Animation" id=5]
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 528, 448 ), Vector2( 528, 256 ) ]
+}
+
 [node name="player" type="Area2D"]
 script = ExtResource( 2 )
 
@@ -64,6 +108,10 @@ collide_with_bodies = false
 
 [node name="cam" type="Camera2D" parent="."]
 current = true
+
+[node name="walk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -10.0
 
 [node name="anim" type="AnimationPlayer" parent="."]
 autoplay = "idle"
@@ -134,10 +182,20 @@ margin_bottom = 32.0
 custom_fonts/font = ExtResource( 4 )
 text = "Level: 99"
 
-[node name="vbox" type="VBoxContainer" parent="canvas/stats/vbox"]
+[node name="exp" type="ProgressBar" parent="canvas/stats/vbox"]
 margin_top = 36.0
 margin_right = 116.0
-margin_bottom = 104.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 4 )
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+max_value = 10.0
+percent_visible = false
+
+[node name="vbox" type="VBoxContainer" parent="canvas/stats/vbox"]
+margin_top = 44.0
+margin_right = 116.0
+margin_bottom = 112.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -168,4 +226,38 @@ margin_right = 116.0
 margin_bottom = 68.0
 custom_fonts/font = ExtResource( 4 )
 text = " SPD: 99"
+
+[node name="level_up" type="Control" parent="canvas"]
+visible = false
+margin_left = 528.0
+margin_top = 256.0
+margin_right = 568.0
+margin_bottom = 296.0
+rect_scale = Vector2( 2, 2 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="canvas/level_up"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 4 )
+text = "LEVEL UP!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="texture_rect" type="TextureRect" parent="canvas/level_up"]
+margin_left = 80.0
+margin_top = -16.0
+margin_right = 112.0
+margin_bottom = 16.0
+texture = ExtResource( 8 )
+
+[node name="anim" type="AnimationPlayer" parent="canvas/level_up"]
+anims/pop = SubResource( 5 )
 [connection signal="area_entered" from="." to="." method="_on_player_area_entered"]
+[connection signal="animation_finished" from="canvas/level_up/anim" to="canvas/level_up" method="_on_anim_animation_finished"]

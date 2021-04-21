@@ -1,6 +1,7 @@
 extends Node2D
 
 func _ready():
+	Items.add_initial_stats()
 	pass
 
 func _input(event):

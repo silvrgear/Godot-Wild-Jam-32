@@ -16,8 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Godot Wild Jam 32"
-run/main_scene="res://scenes/test.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://scenes/main_menu.tscn"
+boot_splash/image="res://wallpaper.png"
+config/icon="res://sprites/player_icon.png"
+config/windows_native_icon="res://player_icon.ico"
+
+[autoload]
+
+Items="*res://entities/items.tscn"
 
 [debug]
 

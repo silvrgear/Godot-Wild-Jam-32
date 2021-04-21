@@ -7,7 +7,7 @@ export (int) var east = 0
 export (int) var west = 0
 export (int) var south = 0
 
-var monsters = {"worm": 1, "wormgator": 0, "mole": 0, "miner_mole": 0, "wulf": 0,
+var monsters = {"worm": 0, "wormgator": 0, "mole": 0, "miner_mole": 0, "wulf": 0,
 				"wulf_pack": 0, "gobk": 0, "gobking": 0}
 var enemies = 0
 
@@ -53,11 +53,21 @@ func set_outcome(id): #after pressing yes in confirm_move
 			"lvlu": pass
 			"artf": pass
 	
-	play_event()
+	if enemies > 0:
+		play_event()
+	else:
+		no_monsters_event()
 	print(monsters)
 	pass
 
+func no_monsters_event():
+	get_parent().get_parent().get_node("canvas/roll_mgr").enable_rolling()
+	pass
+
 func play_event():
+	var p = get_parent().get_parent().get_node("player")
+	p.get_node("canvas/stats").visible = false
+	
 	var enemies = monsters.values()
 	for i in range(0, enemies.size(), 1):
 		if enemies[i] >= 1:
